@@ -24,10 +24,10 @@ var userSchema = new Schema(
       type: Number,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
+    role: {
+      type: String,
       required: true,
-      default: false
+      default: 'Customer'
     },
   },
   { timestamps: true }

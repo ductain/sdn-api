@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const quoteSchema = new Schema(
   {
     packageType: {
-      type: String,
+      type: Number,
       required: true,
     },
     packageCost: {
