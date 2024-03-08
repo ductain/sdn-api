@@ -1,6 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const constructionItemsOrder = new Schema({
+  constructionItem: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ConstructionItems",
+  },
+  quantity:{
+    type: Number,
+  },
+  itemCost:{
+    //Dongia * quantity
+    type: Number,
+  }
+})
+
 const projectSchema = new Schema(
   {
     name: {
@@ -30,6 +44,15 @@ const projectSchema = new Schema(
     constructionType: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ConstructionTypes",
+    },
+    packageCost:{
+      //Gia uoc tinh xay dung goi da chon (chua bao gom vat lieu)
+      type: Number,
+    },
+    constructionItemsOrder: [constructionItemsOrder],
+    totalItemsCost:{
+      //Tong gia tri cac vat lieu da chon (so bo)
+      type: Number,
     },
     status: {
       type: Boolean,

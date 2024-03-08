@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// const constructionItemOrder = new Schema({
+//   constructionItem: [{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "ConstructionItems",
+//   }],
+//   quantity: number,
+// })
+
 const contractSchema = new Schema(
   {
     quote: {
@@ -10,14 +18,6 @@ const contractSchema = new Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
-    },
-    constructionItem: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ConstructionItems",
-    },
-    total: {
-      type: Number,
-      required: true,
     },
     status: {
       type: Number,

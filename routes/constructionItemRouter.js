@@ -1,6 +1,5 @@
 const express = require("express");
 const constructionItemController = require("../controllers/constructionItemController");
-
 const constructionItemRouter = express.Router();
 constructionItemRouter
   .route("/")

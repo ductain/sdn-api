@@ -15,14 +15,15 @@ const constructionItemSchema = new Schema(
       type: String,
       required: true,
     },
+    //Don gia
     value: {
       type: Number,
       required: true,
     },
-    quantity: {
-      type: Number,
-      required: true,
-      default: 1,
+    //Bao,cai,thung
+    unit: {
+      type: String,
+      required: true
     },
     status: {
       type: Boolean,

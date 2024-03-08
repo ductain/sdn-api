@@ -3,17 +3,13 @@ const Schema = mongoose.Schema;
 
 const quoteSchema = new Schema(
   {
-    packageType: {
-      type: Number,
-      required: true,
-    },
-    packageCost: {
-      type: Number,
-      required: true,
-    },
     project: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Projects",
+    },
+    total: {
+      //tong cua packageCost + totalItemsCost cua project
+      type: Number,
     },
     status: {
       type: Boolean,
