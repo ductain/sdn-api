@@ -10,6 +10,5 @@ contractRouter
   .route("/:Id")
   .get(contractController.getById)
   .put(contractController.updateById)
-  .delete(contractController.delete);
 
 module.exports = contractRouter;

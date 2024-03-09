@@ -2,10 +2,12 @@ const Contracts = require("../models/Contract");
 
 class ContractController {
   getAll(req, res, next) {
-    Contracts.find({ status: true })
-      .populate("quote")
+    Contracts.find({})
+      .populate({
+        path: "quote",
+        populate: { path: "project", populate: { path: "constructionType" } },
+      })
       .populate("user")
-      .populate("constructionItem")
       .then((contracts) => {
         res.status(200).json(contracts);
       })
@@ -16,10 +18,12 @@ class ContractController {
   }
   getById(req, res, next) {
     const contractId = req.params.Id;
-    Contracts.findOne({ _id: contractId, status: true })
-      .populate("quote")
+    Contracts.findOne({ _id: contractId })
+      .populate({
+        path: "quote",
+        populate: { path: "project" },
+      })
       .populate("user")
-      .populate("constructionItem")
       .then((contract) => {
         res.status(200).json(contract);
       })
@@ -33,11 +37,10 @@ class ContractController {
     Contracts.findOne({
       quote: contract.quote,
       user: contract.user,
-      constructionItem: contract.constructionItem,
       status: true,
     })
-      .then((contract) => {
-        if (contract) {
+      .then((existContract) => {
+        if (existContract) {
           return res.status(404).json("The contract has already exist");
         } else {
           return contract
@@ -53,11 +56,7 @@ class ContractController {
   updateById(req, res, next) {
     const Id = req.params.Id;
     Contracts.findOne({
-      quote: req.body.quote,
-      user: req.body.user,
-      constructionItem: req.body.constructionItem,
       _id: { $ne: Id },
-      status: true,
     })
       .then((existingData) => {
         if (existingData) {
@@ -77,22 +76,6 @@ class ContractController {
             console.log(error);
             res.status(500).json(error);
           });
-      })
-      .catch((error) => {
-        console.log(error);
-        res.status(500).json(error);
-      });
-  }
-  delete(req, res, next) {
-    Contracts.findByIdAndUpdate(
-      { _id: req.params.Id },
-      {
-        $set: { status: false },
-      },
-      { new: true }
-    )
-      .then(() => {
-        res.status(200).json("Deleted successfully!");
       })
       .catch((error) => {
         console.log(error);

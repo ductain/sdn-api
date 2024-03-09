@@ -11,8 +11,9 @@ const constructionItemRouter = require("./routes/constructionItemRouter");
 const projectRouter = require("./routes/projectRouter");
 const quoteRouter = require("./routes/quoteRouter");
 const userRouter = require("./routes/userRouter");
+const contractRouter = require("./routes/contractRouter");
 
-const connect = mongoose.connect("mongodb://127.0.0.1:27017/SdnProject");
+const connect = mongoose.connect("mongodb+srv://ductaikhua:ductaikhua@cluster0.amqjyng.mongodb.net/SdnProject?retryWrites=true&w=majority");
 connect.then(
   (db) => {
     console.log("Database connected correctly to server");
@@ -34,6 +35,7 @@ app.use("/construction_items", constructionItemRouter);
 app.use("/projects", projectRouter);
 app.use("/quotes", quoteRouter);
 app.use("/auth", userRouter);
+app.use("/contracts",contractRouter);
 
 app.listen(port, () => {
   console.log("Server is running.");
